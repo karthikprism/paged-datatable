@@ -109,7 +109,7 @@ final class DropdownTableFilter<T extends Object> extends TableFilter<T> {
   Widget buildPicker(BuildContext context, FilterState<T> state) {
     return DropdownButtonFormField<T>(
       items: items,
-      value: state.value,
+      initialValue: state.value,
       onChanged: (newValue) {},
       onSaved: (newValue) {
         state.value = newValue;
@@ -216,13 +216,10 @@ final class DateRangePickerTableFilter extends TableFilter<DateTimeRange> {
   /// This is useful on desktop platforms.
   static TransitionBuilder sizedDialog(double height, double width) {
     return (context, child) => Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxWidth: 400.0,
-              maxHeight: 600.0,
-            ),
-            child: child,
-          ),
-        );
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 400.0, maxHeight: 600.0),
+        child: child,
+      ),
+    );
   }
 }

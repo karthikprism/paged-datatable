@@ -73,8 +73,10 @@ class _PageSizeSelectorState<K extends Comparable<K>, T>
   @override
   Widget build(BuildContext context) {
     final localizations = PagedDataTableLocalization.of(context);
-    assert(controller._pageSizes != null,
-        "PageSizeSelector widget can be used only if the pageSizes property is set.");
+    assert(
+      controller._pageSizes != null,
+      "PageSizeSelector widget can be used only if the pageSizes property is set.",
+    );
 
     return Row(
       children: [
@@ -84,10 +86,14 @@ class _PageSizeSelectorState<K extends Comparable<K>, T>
         SizedBox(
           width: 100,
           child: DropdownButtonFormField<int>(
-            value: controller.pageSize,
+            initialValue: controller.pageSize,
             items: controller._pageSizes!
-                .map((pageSize) => DropdownMenuItem(
-                    value: pageSize, child: Text(pageSize.toString())))
+                .map(
+                  (pageSize) => DropdownMenuItem(
+                    value: pageSize,
+                    child: Text(pageSize.toString()),
+                  ),
+                )
                 .toList(growable: false),
             onChanged: controller._state == _TableState.fetching
                 ? null
@@ -99,7 +105,8 @@ class _PageSizeSelectorState<K extends Comparable<K>, T>
             style: theme.footerTextStyle.copyWith(fontSize: 14),
             decoration: const InputDecoration(
               border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFFD6D6D6))),
+                borderSide: BorderSide(color: Color(0xFFD6D6D6)),
+              ),
               isCollapsed: true,
               contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
             ),
@@ -244,7 +251,8 @@ class _NavigationButtonsState<K extends Comparable<K>, T>
           tooltip: localizations.previousPageButtonText,
           splashRadius: 20,
           icon: const Icon(Icons.keyboard_arrow_left_rounded),
-          onPressed: (controller.hasPreviousPage &&
+          onPressed:
+              (controller.hasPreviousPage &&
                   controller._state != _TableState.fetching)
               ? controller.previousPage
               : null,
@@ -254,7 +262,8 @@ class _NavigationButtonsState<K extends Comparable<K>, T>
           tooltip: localizations.nextPageButtonText,
           splashRadius: 20,
           icon: const Icon(Icons.keyboard_arrow_right_rounded),
-          onPressed: (controller.hasNextPage &&
+          onPressed:
+              (controller.hasNextPage &&
                   controller._state != _TableState.fetching)
               ? controller.nextPage
               : null,
